@@ -1,6 +1,7 @@
 FROM php:8.2-apache
 
 # Install system dependencies
+# Install system dependencies
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
     git \
     curl \
@@ -12,9 +13,12 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
     zip \
     unzip \
     sqlite3 \
+    libsqlite3-dev \
+    pkg-config \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install pdo pdo_sqlite mbstring exif pcntl bcmath gd \
     && rm -rf /var/lib/apt/lists/*
+
 
 # Enable Apache rewrite
 RUN a2enmod rewrite
